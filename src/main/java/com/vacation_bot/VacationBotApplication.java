@@ -12,6 +12,7 @@ import com.vacation_bot.core.services.UserService;
 import com.vacation_bot.core.validation.RegisterVacationValidator;
 import com.vacation_bot.core.validation.RequestVacationListValidator;
 import com.vacation_bot.core.words.WordsService;
+import com.vacation_bot.gateway.outbound.slack.SlackApiPort;
 import com.vacation_bot.repositories.DefaultRepositoryFactory;
 import com.vacation_bot.repositories.RepositoryFactory;
 import com.vacation_bot.shared.ApplicationProperties;
@@ -70,8 +71,8 @@ public class VacationBotApplication {
 	}
 
 	@Bean
-	public UserPort userPort( RepositoryFactory repositoryFactory ) {
-		return new UserService( repositoryFactory );
+	public UserPort userPort( RepositoryFactory repositoryFactory, SlackApiPort slackApiPort ) {
+		return new UserService( repositoryFactory, slackApiPort );
 	}
 
 	@Bean

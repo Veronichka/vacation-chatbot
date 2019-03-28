@@ -25,11 +25,6 @@ import java.util.UUID;
  */
 public class RegisterVacationService extends BaseService {
 
-    /**
-     * The default total vacation days.
-     */
-    private static final int DEFAULT_VACATION_TOTAL_DAYS = 20;
-
     public RegisterVacationService( RepositoryFactory factory ) {
         super( factory );
     }
@@ -53,15 +48,7 @@ public class RegisterVacationService extends BaseService {
                 .orElseThrow( () -> new RepositoryException( SharedConstants.USER_NOT_FOUND_MESSAGE ) );
 
         final VacationTotalModel vacationTotal = getVacationTotalRepository().findByUserIdAndYear( user.getId(), currentYear );
-        if ( vacationTotal == null ) {
-            VacationTotalModel newVacationTotal = new VacationTotalModel();
-            newVacationTotal.setUserId( user.getId() );
-            newVacationTotal.setVacationTotal( DEFAULT_VACATION_TOTAL_DAYS );
-            newVacationTotal.setYear( currentYear );
-            return compareVacationDaysAndReservedDays( newVacationTotal, user, startDate, endDate, period );
-        } else {
-            return compareVacationDaysAndReservedDays( vacationTotal, user, startDate, endDate, period );
-        }
+        return compareVacationDaysAndReservedDays( vacationTotal, user, startDate, endDate, period );
     }
 
     private String compareVacationDaysAndReservedDays( final VacationTotalModel vacationTotal,

@@ -56,6 +56,5 @@ class RegisterVacationServiceUnitTest extends AbstractSpockUnitTest {
         user        ||   vacationTotal        || expectToCreateVacation  |  expectedResult                                                                                                        | description
         validUser   ||   validVacationTotal1  || 0                       |  "You can not receive vacation. You have 15 days."                                                                     | 'with no vacation days left'
         validUser   ||   validVacationTotal2  || 1                       |  "The registration of your vacation from 2017-10-02 to 2017-10-20 was successfully completed! You have left 6 days"    | 'with happy path'
-        validUser   ||   null                 || 1                       |  "The registration of your vacation from 2017-10-02 to 2017-10-20 was successfully completed! You have left 1 days"    | 'with days left but with no totals in the database'
     }
 }
